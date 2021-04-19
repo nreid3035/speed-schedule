@@ -20,7 +20,9 @@ class Home extends React.Component {
               <button>Add Event</button>
             </Link>
             <div className="bottom-nav-bar">
-                <h3>Events</h3>
+                <Link to={'/events'}>
+                  <h3>Events</h3>
+                </Link>
                 <h3>Today's Schedule</h3>
                 <h3>Calendar</h3>
             </div>
@@ -28,3 +30,5 @@ class Home extends React.Component {
         )
     }
 }
+
+export default Home
