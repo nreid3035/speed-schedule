@@ -5,6 +5,7 @@ import Signup from '../Signup/Signup'
 import Login from '../Login/Login'
 import Home from '../Home/Home'
 import EventsList from '../EventsList/EventsList'
+import CalendarPage from '../CalendarPage/CalendarPage'
 import SpeedScheduleContext from '../SpeedScheduleContext'
 import dummyDataObj from '../dummy-data'
 import AddEvent from '../AddEvent/AddEvent'
@@ -51,6 +52,10 @@ class App extends React.Component {
         <Route 
             path={'/add-event'}
             component={AddEvent}
+            />
+        <Route 
+            path={'/calendar'}
+            component={CalendarPage}
             />
       </>
     )
