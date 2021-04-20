@@ -19,6 +19,9 @@ class Home extends React.Component {
             <Link to={'/add-event'}>
               <button>Add Event</button>
             </Link>
+            <Link to={'/schedule-event'}>
+              <button>Schedule Event</button>
+            </Link>
             <div className="bottom-nav-bar">
                 <Link to={'/events'}>
                   <h3>Events</h3>

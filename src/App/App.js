@@ -6,6 +6,7 @@ import Login from '../Login/Login'
 import Home from '../Home/Home'
 import EventsList from '../EventsList/EventsList'
 import CalendarPage from '../CalendarPage/CalendarPage'
+import ScheduleEvent from '../ScheduleEvent/ScheduleEvent'
 import SpeedScheduleContext from '../SpeedScheduleContext'
 import dummyDataObj from '../dummy-data'
 import AddEvent from '../AddEvent/AddEvent'
@@ -22,6 +23,12 @@ class App extends React.Component {
   handleAddEventStateChange = (newEvent) => {
     this.setState({
       events: [...this.state.events, newEvent]
+    })
+  }
+
+  handleSchedEventStateChange = (newScheduledEvent) => {
+    this.setState({
+      scheduledEvents: [...this.state.scheduledEvents, newScheduledEvent]
     })
   }
 
@@ -57,16 +64,23 @@ class App extends React.Component {
             path={'/calendar'}
             component={CalendarPage}
             />
+        <Route
+            path={'/schedule-event'}
+            component={ScheduleEvent}
+            />
       </>
     )
   }
 
   render() {
 
+    console.log(this.state)
+
     const values = {
       events: this.state.events,
       scheduledEvents: this.state.scheduledEvents,
-      handleAddEventStateChange: this.handleAddEventStateChange
+      handleAddEventStateChange: this.handleAddEventStateChange,
+      handleSchedEventStateChange: this.handleSchedEventStateChange
     }
 
     return (
