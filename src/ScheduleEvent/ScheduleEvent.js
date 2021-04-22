@@ -1,3 +1,4 @@
+import moment from 'moment'
 import React from 'react'
 import SpeedScheduleContext from '../SpeedScheduleContext'
 
@@ -15,12 +16,13 @@ class ScheduleEvent extends React.Component {
         e.preventDefault()
         const newScheduledEvent = {
             sched_event_id: this.context.scheduledEvents.length + 1,
-            event_id: e.target['select-event'].value,
-            date: e.target['date'].value,
+            event_id: Number(e.target['select-event'].value),
+            date: moment(e.target['date'].value).format('MMM Do YYYY'),
             start_time: e.target['start-time'].value,
             end_time: e.target['end-time'].value
         }
 
+    console.log(newScheduledEvent)
     this.context.handleSchedEventStateChange(newScheduledEvent)
     this.props.history.push('/home')
     }

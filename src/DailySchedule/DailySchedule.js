@@ -24,8 +24,7 @@ class DailySchedule extends React.Component {
         this.setState({
            month: this.state.month - 1 
         })
-  
-        console.log(this.state.month)
+
         switch(this.state.month - 1) {
             case 0: 
               this.setState({

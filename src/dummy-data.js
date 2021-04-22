@@ -35,35 +35,35 @@ const dummyDataObj = {
         {
             sched_event_id: 1,
             event_id: 2,
-            date: "April 24th 2020",
+            date: "Apr 24th 2021",
             start_time: "1100",
             end_time: "1300"
         },
         {
             sched_event_id: 2,
             event_id: 1,
-            date: "April 24th 2020",
+            date: "Apr 24th 2021",
             start_time: "1330",
             end_time: "1415"
         },
         {
             sched_event_id: 3,
             event_id: 3,
-            date: "April 24th 2020",
+            date: "Apr 24th 2021",
             start_time: "1500",
             end_time: "1600"
         },
         {
             sched_event_id: 4,
             event_id: 4,
-            date: "April 24th 2020",
+            date: "Apr 24th 2021",
             start_time: "1800",
             end_time: "1835"
         },
         {
             sched_event_id: 5,
             event_id: 5,
-            date: "April 24th 2020",
+            date: "Apr 24th 2021",
             start_time: "1900",
             end_time: "1925"
         },
