@@ -24,7 +24,7 @@ class CalendarPage extends React.Component {
 
     getDailyInfo = () => {
         console.log(this.state.date)
-        const todaysEvents = this.context.scheduledEvents.filter(eventObj => eventObj.date === moment(this.state.date).format('MMM Do YYYY'))
+        const todaysEvents = this.context.scheduledEvents.filter(eventObj => eventObj.date === moment(this.context.date).format('MMM Do YYYY'))
         if (!todaysEvents.length) {
             return this.setState({
                 dailyInfo: {
