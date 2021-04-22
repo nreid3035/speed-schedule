@@ -26,7 +26,9 @@ class Home extends React.Component {
                 <Link to={'/events'}>
                   <h3>Events</h3>
                 </Link>
+                <Link to={'/daily-schedule'}>
                   <h3>Today's Schedule</h3>
+                </Link>
                 <Link to={'/calendar'}>
                   <h3>Calendar</h3>
                 </Link>

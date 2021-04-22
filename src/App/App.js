@@ -7,6 +7,7 @@ import Home from '../Home/Home'
 import EventsList from '../EventsList/EventsList'
 import CalendarPage from '../CalendarPage/CalendarPage'
 import ScheduleEvent from '../ScheduleEvent/ScheduleEvent'
+import DailySchedule from '../DailySchedule/DailySchedule'
 import SpeedScheduleContext from '../SpeedScheduleContext'
 import dummyDataObj from '../dummy-data'
 import AddEvent from '../AddEvent/AddEvent'
@@ -67,6 +68,10 @@ class App extends React.Component {
         <Route
             path={'/schedule-event'}
             component={ScheduleEvent}
+            />
+        <Route 
+            path={'/daily-schedule'}
+            component={DailySchedule}
             />
       </>
     )
