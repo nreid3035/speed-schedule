@@ -1,5 +1,6 @@
 import moment from 'moment'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import SpeedScheduleContext from '../SpeedScheduleContext'
@@ -19,12 +20,6 @@ class CalendarPage extends React.Component {
                 endOfDay: ''
             }
         }
-    }
-
-    calendarDateChange = (newDate) => {
-        this.setState({
-            date: newDate
-        })
     }
 
     getDailyInfo = () => {
@@ -59,13 +54,14 @@ class CalendarPage extends React.Component {
     }
 
     render() {
+        console.log(this.context)
 
         return (
             <div>
                 <Calendar 
-                    onChange={this.calendarDateChange}
-                    value={this.state.date}/>
-                    <p>{moment(this.state.date).format('MMMM Do YYYY')}</p>
+                    onChange={this.context.setDateState}
+                    value={this.context.date}/>
+                    <p>{moment(this.context.date).format('MMMM Do YYYY')}</p>
                     <button onClick={() => this.getDailyInfo()}>See Whats Going on this Day</button>
                     <div className="hidden">
                         <h2>Info for this date:</h2>
@@ -73,7 +69,10 @@ class CalendarPage extends React.Component {
                         <p>First Event Start Time: {this.state.dailyInfo.firstEventTime}</p>
                         <p>Last Event End Time: {this.state.dailyInfo.endOfDay}</p>
                     </div>
-                    <button>View in Daily Schedule</button>
+                    <Link to={'/daily-schedule'}>
+                      <button>View in Daily Schedule</button>
+                    </Link>
+
             </div>
         )
     }

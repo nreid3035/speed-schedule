@@ -4,5 +4,6 @@ export default React.createContext({
     events: [],
     scheduledEvents: [],
     handleAddEventStateChange: () => {},
-    handleSchedEventStateChange: () => {}
+    handleSchedEventStateChange: () => {},
+    setDateState: () => {}
 })

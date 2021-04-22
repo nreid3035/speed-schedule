@@ -1,16 +1,27 @@
 import moment from 'moment'
 import React from 'react'
+import SpeedScheduleContext from '../SpeedScheduleContext'
 
 class DailySchedule extends React.Component {
+    static contextType = SpeedScheduleContext
+
     constructor(props) {
         super(props)
         this.state = {
             date: moment(new Date()).format('MMM Do YYYY'),
-            month: new Date().getMonth(),
-            day: new Date().getDate(),
-            year: new Date().getFullYear()
+            month: 0,
+            day: 0,
+            year: 0
         }
     } 
+
+    componentDidMount() {
+        this.setState({
+            month: new Date(this.context.date).getMonth(),
+            day: new Date(this.context.date).getDate(),
+            year: new Date(this.context.date).getFullYear()
+        })
+    }
 
     switchDownAYear = () => {
         this.setState({

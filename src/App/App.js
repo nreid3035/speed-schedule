@@ -11,14 +11,22 @@ import DailySchedule from '../DailySchedule/DailySchedule'
 import SpeedScheduleContext from '../SpeedScheduleContext'
 import dummyDataObj from '../dummy-data'
 import AddEvent from '../AddEvent/AddEvent'
+import moment from 'moment'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+        date: new Date(),
         events: [...dummyDataObj.events],
         scheduledEvents: [...dummyDataObj.scheduledEvents]
     }
+  }
+
+  setDateState = (newDate) => {
+    this.setState({
+      date: newDate
+    })
   }
 
   handleAddEventStateChange = (newEvent) => {
@@ -79,13 +87,13 @@ class App extends React.Component {
 
   render() {
 
-    console.log(this.state)
-
     const values = {
+      date: this.state.date,
       events: this.state.events,
       scheduledEvents: this.state.scheduledEvents,
       handleAddEventStateChange: this.handleAddEventStateChange,
-      handleSchedEventStateChange: this.handleSchedEventStateChange
+      handleSchedEventStateChange: this.handleSchedEventStateChange,
+      setDateState: this.setDateState
     }
 
     return (
