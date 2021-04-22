@@ -1,5 +1,7 @@
 import moment from 'moment'
 import React from 'react'
+import ReactDOM from 'react-dom'
+import TimeBlock from '../TimeBlock/TimeBlock'
 import SpeedScheduleContext from '../SpeedScheduleContext'
 
 class DailySchedule extends React.Component {
@@ -8,7 +10,7 @@ class DailySchedule extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            date: moment(new Date()).format('MMM Do YYYY'),
+            scheduledEvents: [],
             month: 0,
             day: 0,
             year: 0
@@ -16,10 +18,14 @@ class DailySchedule extends React.Component {
     } 
 
     componentDidMount() {
+        
+        const scheduledEvents = this.context.scheduledEvents.filter(schedObj => schedObj.date === moment(this.context.date).format('MMM Do YYYY'))
+
         this.setState({
             month: new Date(this.context.date).getMonth(),
             day: new Date(this.context.date).getDate(),
-            year: new Date(this.context.date).getFullYear()
+            year: new Date(this.context.date).getFullYear(),
+            scheduledEvents: [...scheduledEvents]
         })
     }
 
@@ -240,6 +246,14 @@ class DailySchedule extends React.Component {
 
 
     render() {
+
+        const timeBlocks = this.state.scheduledEvents.map(schedObj => {
+            return (
+                <TimeBlock schedObj={schedObj} />
+            )
+        })
+        
+        console.log(timeBlocks)
         console.log(this.state)
         let month = this.state.month
         const day = this.state.day
@@ -280,10 +294,15 @@ class DailySchedule extends React.Component {
               break;
             case 11:
               month = "Dec"
+              break;
+            default: 
+              month = ""
+              break;
         }
         const date = `${month} ${day}, ${year}`
 
-
+        // AFTER RENDER, LOOP THROUGH DATA, MAKE TD ELEMENTS THAT CORRESPOND WITH TIMES, APPEND THOSE ELEMENTS TO THE MATCHING TR ELEMENTS
+        
         
         return (
             <>
@@ -294,13 +313,12 @@ class DailySchedule extends React.Component {
                 <tr>
                     <th>{date}</th>
                 </tr>
-                <tr className="sched-row" id="2400-row">
-                    <td className="time-column" id="2400">12am</td>
-                    <td className="sched-column"></td>
+                <tr className="sched-row" id="0000-row">
+                    <td className="time-column" id="0000">12am</td>
                 </tr>
                 <tr className="sched-row" id="0100-row">
                     <td className="time-column" id="0100">1am</td>
-                    <td className="sched-column"></td>
+                    
                 </tr>
                 <tr className="sched-row" id="0200-row">
                     <td className="time-column" id="0200">2am</td>
