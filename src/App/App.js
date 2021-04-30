@@ -23,6 +23,12 @@ class App extends React.Component {
     }
   }
 
+  setDayState = (newDay) => {
+    this.setState({
+      day: newDay
+    })
+  }
+
   setDateState = (newDate) => {
     this.setState({
       date: newDate

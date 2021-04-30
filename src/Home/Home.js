@@ -1,12 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import SpeedScheduleContext from '../SpeedScheduleContext'
 
 class Home extends React.Component {
+    static contextType = SpeedScheduleContext
+  
     constructor(props) {
         super(props)
         this.state = {
 
         }
+    }
+
+    handleTodayClick = () => {
+      this.context.setDateState(new Date())
+      this.props.history.push('/daily-schedule')
     }
 
     render() {
@@ -26,9 +34,7 @@ class Home extends React.Component {
                 <Link to={'/events'}>
                   <h3>Events</h3>
                 </Link>
-                <Link to={'/daily-schedule'}>
-                  <h3>Today's Schedule</h3>
-                </Link>
+                <button onClick={() => this.handleTodayClick()}>Today's Schedule</button>
                 <Link to={'/calendar'}>
                   <h3>Calendar</h3>
                 </Link>
