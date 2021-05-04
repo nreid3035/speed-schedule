@@ -32,13 +32,12 @@ class Home extends React.Component {
             </Link>
             <div className="bottom-nav-bar">
                 <Link to={'/events'}>
-                  <h3>Events</h3>
+                  <button>Events</button>
                 </Link>
                 <button onClick={() => this.handleTodayClick()}>Today's Schedule</button>
                 <Link to={'/calendar'}>
-                  <h3>Calendar</h3>
-                </Link>
-                
+                  <button>Calendar</button>
+                </Link>        
             </div>
             </>
         )

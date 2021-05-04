@@ -1,4 +1,5 @@
 import React from 'react'
+import './Signup.css'
 import { Link } from 'react-router-dom'
 
 class Signup extends React.Component {
@@ -9,7 +10,7 @@ class Signup extends React.Component {
 
     render() {
         return (
-            <form>
+            <form className="signup-form">
                 <label htmlFor="first-name" className="signup-label">First Name</label>
                 <input type="text" name="first-name" id="first-name" className="signup-input" />
                 <label htmlFor="last-name" className="signup-label">Last Name</label>

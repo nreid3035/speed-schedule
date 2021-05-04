@@ -1,4 +1,5 @@
 import React from 'react'
+import './App.css'
 import { Link, Route } from 'react-router-dom'
 import LandingPage from '../LandingPage/LandingPage'
 import Signup from '../Signup/Signup'
@@ -104,8 +105,8 @@ class App extends React.Component {
 
     return (
       <SpeedScheduleContext.Provider value={values}>
-      <div>
-        <header>
+      <div className="app-container">
+        <header className="app-header">
           <h1>Speed Schedule</h1>
           <div>
             <img src="" alt="hamburger-menu"/>
@@ -117,7 +118,7 @@ class App extends React.Component {
               <button>Log Out</button>
           </nav>
         </header>
-        <main>
+        <main className="app-main">
           {this.renderMainRoutes()}
         </main>
         <footer>

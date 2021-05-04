@@ -1,4 +1,5 @@
 import React from 'react'
+import './Event.css'
 
 class Event extends React.Component {
     constructor(props) {
@@ -11,8 +12,8 @@ class Event extends React.Component {
     render() {
         console.log(this.props)
         return (
-            <div>
-                <h3>{this.props.eventObj.event_name}</h3>
+            <div className="event-container">
+                <h3 className="event-name">{this.props.eventObj.event_name}</h3>
                 <p>Duration: {this.props.eventObj.duration}</p>
                 <p>Notes: {this.props.eventObj.notes}</p>
             </div>

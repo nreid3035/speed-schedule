@@ -71,7 +71,7 @@ class DailyTable extends React.Component {
         return (
             <table>
                 <thead>
-                  <h2>{this.props.propsObj.date}</h2>
+                  <h2 className="daily-table-date">{this.props.propsObj.date}</h2>
                 </thead>
                 <tr>
                   <th>Time</th>

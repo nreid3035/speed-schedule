@@ -1,7 +1,6 @@
 import moment from 'moment'
 import React from 'react'
-import ReactDOM from 'react-dom'
-import TimeBlock from '../TimeBlock/TimeBlock'
+import './DailySchedule.css'
 import SpeedScheduleContext from '../SpeedScheduleContext'
 import DailyTable from '../DailyTable/DailyTable'
 
@@ -300,8 +299,10 @@ class DailySchedule extends React.Component {
         
         return (
             <>
-            <button onClick={() => this.handleLeftButtonClick()}>Left</button>
-            <button onClick={() => this.handleRightButtonClick()}>Right</button>
+            <div className="daily-schedule-buttons-container">
+              <button onClick={() => this.handleLeftButtonClick()}>Left</button>
+              <button onClick={() => this.handleRightButtonClick()}>Right</button>
+            </div>
 
             <DailyTable propsObj={{
                 date: date,

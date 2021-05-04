@@ -1,4 +1,5 @@
 import React from 'react'
+import './AddEvent.css'
 import SpeedScheduleContext from '../SpeedScheduleContext'
 
 class AddEvent extends React.Component {
@@ -27,7 +28,7 @@ class AddEvent extends React.Component {
 
     render() {
         return (
-            <form onSubmit={(e) => this.handleAddEventSubmit(e)}>
+            <form className="add-event-form" onSubmit={(e) => this.handleAddEventSubmit(e)}>
                 <label htmlFor="event-title" className="add-event-label">Event Title</label>
                 <input type="text" name="event-title" id="event-title" className="add-event-input" />
                 <label htmlFor="duration" className="add-event-label">Duration (minutes)</label>

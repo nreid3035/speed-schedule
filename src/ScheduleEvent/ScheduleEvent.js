@@ -1,5 +1,6 @@
 import moment from 'moment'
 import React from 'react'
+import './ScheduleEvent.css'
 import SpeedScheduleContext from '../SpeedScheduleContext'
 
 class ScheduleEvent extends React.Component {
@@ -36,7 +37,7 @@ class ScheduleEvent extends React.Component {
         })
 
         return (
-            <form onSubmit={(e) => this.handleSchedEventSubmit(e)}>
+            <form className="schedule-event-form" onSubmit={(e) => this.handleSchedEventSubmit(e)}>
                 <label htmlFor="date" className="sched-event-label">Date (MM/DD/YYY):</label>
                 <input type="text" name="date" id="date" className="sched-event-input" />
                 <label htmlFor="start-time" className="sched-event-label">Start Time:</label>

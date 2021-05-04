@@ -57,7 +57,7 @@ class CalendarPage extends React.Component {
         console.log(this.context)
 
         return (
-            <div>
+            <>
                 <Calendar 
                     onChange={this.context.setDateState}
                     value={this.context.date}/>
@@ -72,8 +72,7 @@ class CalendarPage extends React.Component {
                     <Link to={'/daily-schedule'}>
                       <button>View in Daily Schedule</button>
                     </Link>
-
-            </div>
+            </>
         )
     }
 }

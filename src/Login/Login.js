@@ -1,4 +1,5 @@
 import React from 'react'
+import './Login.css'
 import { Link } from 'react-router-dom'
 
 class Login extends React.Component {
@@ -11,7 +12,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <form>
+            <form className="login-form">
                 <label htmlFor="username" className="login-label">Username</label>
                 <input type="text" name="username" id="username" className="login-input" />
                 <label htmlFor="password" className="login-label">Password</label>
