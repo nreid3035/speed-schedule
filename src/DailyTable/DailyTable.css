@@ -6,9 +6,13 @@ table {
     align-items: center;
 }
 th, td {
-    padding: 20px;
     border: 1px solid black;
 }
+
+th {
+    padding: 20px;
+}
+
 
 thead {
     width: 100%;
@@ -18,6 +22,37 @@ thead {
 
 tr {
     width: 100%;
+    display: flex;
+}
+
+.time-column {
+    width: 25%;
+    padding: 20px;
+
+}
+
+.event-table-data {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.data-div-half {
+    width: 100%;
+    border: 1px solid black;
+    height: 50%;
+    text-align: center;
+    padding: 5px;
+}
+
+.data-div-quarter {
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid black;
+    height: 25%;
 }
 
 .daily-table-date {

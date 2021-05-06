@@ -83,7 +83,7 @@ class DailyTable extends React.Component {
                     tableData.push(
                       <tr className="sched-row" id={`${militaryTime}-row`}>
                         <td className="time-column" id={militaryTime}>{militaryTime}</td>
-                        <td>{eventObj[0].event_name}</td>
+                        <td className="event-table-data">{eventObj[0].event_name}</td>
                       </tr> 
                     )
                 } 
@@ -95,7 +95,7 @@ class DailyTable extends React.Component {
                     tableData.push(
                       <tr className="sched-row" id={`${militaryTime}-row`}>
                         <td className="time-column" id={militaryTime}>{militaryTime}</td>
-                        <td>{eventObj[0].event_name}</td>
+                        <td className="event-table-data">{eventObj[0].event_name}</td>
                       </tr> 
                     )
                 }
@@ -107,11 +107,11 @@ class DailyTable extends React.Component {
                     tableData.push(
                       <tr className="sched-row" id={`${militaryTime}-row`}>
                         <td className="time-column" id={militaryTime}>{militaryTime}</td>
-                        <td>
-                          <div>{eventObj[0].event_name}</div>
-                          <div>{eventObj[0].event_name}</div>
-                          <div>{eventObj[0].event_name}</div>
-                          <div></div>
+                        <td className="event-table-data">
+                          <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                          <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                          <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                          <div className="data-div-quarter"></div>
                         </td>
                       </tr>
                     )
@@ -124,9 +124,9 @@ class DailyTable extends React.Component {
                     tableData.push(
                         <tr className="sched-row" id={`${militaryTime}-row`}>
                         <td className="time-column" id={militaryTime}>{militaryTime}</td>
-                        <td>
-                          <div>{eventObj[0].event_name}</div>
-                          <div></div>
+                        <td className="event-table-data">
+                          <div className="data-div-half">{eventObj[0].event_name}</div>
+                          <div className="data-div-half"></div>
                         </td>
                       </tr> 
                     )
@@ -139,11 +139,11 @@ class DailyTable extends React.Component {
                     tableData.push(
                         <tr className="sched-row" id={`${militaryTime}-row`}>
                         <td className="time-column" id={militaryTime}>{militaryTime}</td>
-                        <td>
-                          <div>{eventObj[0].event_name}</div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
+                        <td className="event-table-data">
+                          <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                          <div className="data-div-quarter"></div>
+                          <div className="data-div-quarter"></div>
+                          <div className="data-div-quarter"></div>
                         </td>
                       </tr>
                     )
@@ -166,8 +166,49 @@ class DailyTable extends React.Component {
                         tableData.push(
                         <tr className="sched-row" id={`${militaryTime}-row`}>
                           <td className="time-column" id={militaryTime}>{militaryTime}</td>
-                          <td>{eventObj[0].event_name}</td>
+                          <td className="event-table-data">{eventObj[0].event_name}</td>
                         </tr>
+                        )
+                    } else if (eventObj[0].duration === 60) {
+                        tableData.push(
+                          <tr className="sched-row" id={`${militaryTime}-row`}>
+                            <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                            <td className="event-table-data">{eventObj[0].event_name}</td>
+                          </tr> 
+                        )
+                    } else if (eventObj[0].duration === 45) {
+                        tableData.push(
+                          <tr className="sched-row" id={`${militaryTime}-row`}>
+                            <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                            <td className="event-table-data">
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter"></div>
+                            </td>
+                          </tr>
+                        )
+                    } else if (eventObj[0].duration === 30) {
+                        tableData.push(
+                            <tr className="sched-row" id={`${militaryTime}-row`}>
+                            <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                            <td className="event-table-data">
+                                <div className="data-div-half">{eventObj[0].event_name}</div>
+                                <div className="data-div-half"></div>
+                            </td>
+                          </tr>
+                        )
+                    } else if (eventObj[0].duration === 15) {
+                        tableData.push(
+                          <tr className="sched-row" id={`${militaryTime}-row`}>
+                            <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                            <td className="event-table-data">
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter"></div>
+                            </td>
+                          </tr>
                         )
                     }
                 } else if (schedEvent[0].start_time.slice(2) === "15") {
@@ -178,11 +219,47 @@ class DailyTable extends React.Component {
                         tableData.push(
                           <tr className="sched-row" id={`${militaryTime}-row`}>
                             <td className="time-column" id={militaryTime}>{militaryTime}</td>
-                            <td>
-                                <div></div>
-                                <div>{eventObj[0].event_name}</div>
-                                <div>{eventObj[0].event_name}</div>
-                                <div>{eventObj[0].event_name}</div>
+                            <td className="event-table-data">
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                            </td>
+                          </tr>
+                        )
+                    } else if (eventObj[0].duration === 45) {
+                        tableData.push(
+                          <tr className="sched-row" id={`${militaryTime}-row`}>
+                            <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                            <td className="event-table-data">
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                            </td>
+                          </tr>
+                        )
+                    } else if (eventObj[0].duration === 30) {
+                        tableData.push(
+                            <tr className="sched-row" id={`${militaryTime}-row`}>
+                            <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                            <td className="event-table-data">
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter"></div>
+                            </td>
+                          </tr>
+                        )
+                    } else if (eventObj[0].duration === 15) {
+                        tableData.push(
+                            <tr className="sched-row" id={`${militaryTime}-row`}>
+                            <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                            <td className="event-table-data">
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter`"></div>
                             </td>
                           </tr>
                         )
@@ -195,13 +272,35 @@ class DailyTable extends React.Component {
                         tableData.push(
                           <tr className="sched-row" id={`${militaryTime}-row`}>
                             <td className="time-column" id={militaryTime}>{militaryTime}</td>
-                            <td>
-                                <div></div>
-                                <div>{eventObj[0].event_name}</div>
+                            <td className="event-table-data">
+                                <div className="data-div-half"></div>
+                                <div className="data-div-half">{eventObj[0].event_name}</div>
                             </td>
                           </tr>
                         )
-                    }
+                    } else if (eventObj[0].duration === 30) {
+                        tableData.push(
+                          <tr className="sched-row" id={`${militaryTime}-row`}>
+                            <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                            <td className="event-table-data">
+                                <div className="data-div-half"></div>
+                                <div className="data-div-half">{eventObj[0].event_name}</div>
+                            </td>
+                          </tr>
+                        )
+                    } else if (eventObj[0].duration === 15) {
+                        tableData.push(
+                          <tr className="sched-row" id={`${militaryTime}-row`}>
+                            <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                            <td className="event-table-data">
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter"></div>
+                            </td>
+                          </tr>
+                        )
+                    } 
                 } else if (schedEvent[0].start_time.slice(2) === "45") {
                     if (eventObj[0].duration > 15) {
                         activeBlock = true
@@ -210,25 +309,32 @@ class DailyTable extends React.Component {
                         tableData.push(
                           <tr className="sched-row" id={`${militaryTime}-row`}>
                             <td className="time-column" id={militaryTime}>{militaryTime}</td>
-                            <td>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div>{eventObj[0].event_name}</div>
+                            <td className="event-table-data">
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
                             </td>
                           </tr>
                         )
+                    } else if (eventObj[0].duration === 15) {
+                        <tr className="sched-row" id={`${militaryTime}-row`}>
+                            <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                            <td className="event-table-data">
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter"></div>
+                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                            </td>
+                        </tr>
                     }
                 }
 
-                // tableData.push(
-                //     
-                // )
             } else {
                 tableData.push(
                     <tr className="sched-row" id={`${militaryTime}-row`}>
                         <td className="time-column" id={militaryTime}>{militaryTime}</td>
-                        <td></td>
+                        <td className="event-table-data"></td>
                     </tr>
                 )
             }
@@ -244,8 +350,8 @@ class DailyTable extends React.Component {
                   <h2 className="daily-table-date">{this.props.propsObj.date}</h2>
                 </thead>
                 <tr>
-                  <th>Time</th>
-                  <th>Events</th>
+                  <th className="time-column">Time</th>
+                  <th className="event-table-data">Events</th>
                 </tr>
                 {/* <tr className="sched-row" id="0000-row">
                     <td className="time-column" id="0000">12am</td>

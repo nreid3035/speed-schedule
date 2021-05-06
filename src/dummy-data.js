@@ -21,13 +21,13 @@ const dummyDataObj = {
         {
             event_id: 4,
             event_name: "Grocery Shopping",
-            duration: 35,
+            duration: 45,
             notes: "Grocery list is on the fridge"
         },
         {
             event_id: 5,
             event_name: "Dinner",
-            duration: 25,
+            duration: 15,
             notes: ""
         }
     ],
