@@ -8,7 +8,8 @@ class DailyTable extends React.Component {
     constructor(props) {
         super(props) 
         this.state = {
-
+            activeBlock: "",
+            processedDuration: 0
         }
     }
 
@@ -16,11 +17,34 @@ class DailyTable extends React.Component {
         
     }
 
+    resetState = () => {
+        this.setState({
+            activeBlock: "",
+            processedDuration: 0
+        })
+    }
+
+    setActiveBlock = (startTime) => {
+        this.setState({
+           activeBlock: startTime 
+        })
+    }
+
+    addToProcessedDuration = (processedDuration) => {
+        this.setState({
+            processedDuration: this.state.processedDuration += processedDuration
+        })
+    }
+
     render() {
         console.log(this.props)
 
         const startTimes = []
         const endTimes = []
+        const startHours = []
+        let activeBlock = false
+        let processedDuration = 0
+        let activeStartTime = ""
 
         this.props.propsObj.scheduledEvents.map(schedEvent => {
             return (
@@ -29,6 +53,11 @@ class DailyTable extends React.Component {
             )
             
         })
+
+        startTimes.map(time => {
+            startHours.push(time.slice(0,2))
+        })
+        console.log(startHours)
 
         const tableData = []
         for(let i = 0; i <= 23; i++) {
@@ -43,17 +72,158 @@ class DailyTable extends React.Component {
             if (i >= 10) {
                 militaryTime = `${i * 100}`
             }
-            if (startTimes.includes(militaryTime)) {
-                const schedEvent = this.props.propsObj.scheduledEvents.filter(schedEvent => schedEvent.start_time === militaryTime)
-                const eventObj = this.context.events.filter(eventObj => eventObj.event_id === schedEvent[0].event_id)
-                console.log(eventObj)
 
-                tableData.push(
-                    <tr className="sched-row" id={`${militaryTime}-row`}>
+            if (activeBlock === true) {
+                const schedEvent = this.props.propsObj.scheduledEvents.filter(schedEvent => schedEvent.start_time === activeStartTime)
+                const eventObj = this.context.events.filter(eventObj => eventObj.event_id === schedEvent[0].event_id)
+                const timeLeft = eventObj[0].duration - processedDuration 
+
+                if (timeLeft > 60) {
+                    processedDuration += 60
+                    tableData.push(
+                      <tr className="sched-row" id={`${militaryTime}-row`}>
                         <td className="time-column" id={militaryTime}>{militaryTime}</td>
                         <td>{eventObj[0].event_name}</td>
-                    </tr>
-                )
+                      </tr> 
+                    )
+                } 
+
+                if (timeLeft === 60) {
+                    activeBlock = false
+                    activeStartTime = ""
+                    processedDuration = 0
+                    tableData.push(
+                      <tr className="sched-row" id={`${militaryTime}-row`}>
+                        <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                        <td>{eventObj[0].event_name}</td>
+                      </tr> 
+                    )
+                }
+
+                if (timeLeft === 45) {
+                    activeBlock = false
+                    activeStartTime = ""
+                    processedDuration = 0
+                    tableData.push(
+                      <tr className="sched-row" id={`${militaryTime}-row`}>
+                        <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                        <td>
+                          <div>{eventObj[0].event_name}</div>
+                          <div>{eventObj[0].event_name}</div>
+                          <div>{eventObj[0].event_name}</div>
+                          <div></div>
+                        </td>
+                      </tr>
+                    )
+                }
+
+                if (timeLeft === 30) {
+                    activeBlock = false
+                    activeStartTime = ""
+                    processedDuration = 0
+                    tableData.push(
+                        <tr className="sched-row" id={`${militaryTime}-row`}>
+                        <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                        <td>
+                          <div>{eventObj[0].event_name}</div>
+                          <div></div>
+                        </td>
+                      </tr> 
+                    )
+                }
+
+                if (timeLeft === 15) {
+                    activeBlock = false
+                    activeStartTime = ""
+                    processedDuration = 0
+                    tableData.push(
+                        <tr className="sched-row" id={`${militaryTime}-row`}>
+                        <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                        <td>
+                          <div>{eventObj[0].event_name}</div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                        </td>
+                      </tr>
+                    )
+                }
+
+            }
+            if (startHours.includes(militaryTime.slice(0, 2)) && activeBlock === false) {
+                console.log("line 154, starthours.includes(militaryTime.slice)")
+                const idx = startHours.indexOf(militaryTime.slice(0, 2))
+                const startTime = startTimes[idx]
+                const schedEvent = this.props.propsObj.scheduledEvents.filter(schedEvent => schedEvent.start_time === startTime)
+                const eventObj = this.context.events.filter(eventObj => eventObj.event_id === schedEvent[0].event_id)
+                console.log(eventObj)
+                
+                if (schedEvent[0].start_time.slice(2) === "00") {
+                    if (eventObj[0].duration > 60) {
+                        activeBlock = true
+                        activeStartTime = schedEvent[0].start_time
+                        processedDuration += 60
+                        tableData.push(
+                        <tr className="sched-row" id={`${militaryTime}-row`}>
+                          <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                          <td>{eventObj[0].event_name}</td>
+                        </tr>
+                        )
+                    }
+                } else if (schedEvent[0].start_time.slice(2) === "15") {
+                    if (eventObj[0].duration > 45) {
+                        activeBlock = true
+                        activeStartTime = schedEvent[0].start_time
+                        processedDuration += 45
+                        tableData.push(
+                          <tr className="sched-row" id={`${militaryTime}-row`}>
+                            <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                            <td>
+                                <div></div>
+                                <div>{eventObj[0].event_name}</div>
+                                <div>{eventObj[0].event_name}</div>
+                                <div>{eventObj[0].event_name}</div>
+                            </td>
+                          </tr>
+                        )
+                    }
+                } else if (schedEvent[0].start_time.slice(2) === "30") {
+                    if (eventObj[0].duration > 30) {
+                        activeBlock = true
+                        activeStartTime = schedEvent[0].start_time
+                        processedDuration += 30
+                        tableData.push(
+                          <tr className="sched-row" id={`${militaryTime}-row`}>
+                            <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                            <td>
+                                <div></div>
+                                <div>{eventObj[0].event_name}</div>
+                            </td>
+                          </tr>
+                        )
+                    }
+                } else if (schedEvent[0].start_time.slice(2) === "45") {
+                    if (eventObj[0].duration > 15) {
+                        activeBlock = true
+                        activeStartTime = schedEvent[0].start_time
+                        processedDuration += 15
+                        tableData.push(
+                          <tr className="sched-row" id={`${militaryTime}-row`}>
+                            <td className="time-column" id={militaryTime}>{militaryTime}</td>
+                            <td>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div>{eventObj[0].event_name}</div>
+                            </td>
+                          </tr>
+                        )
+                    }
+                }
+
+                // tableData.push(
+                //     
+                // )
             } else {
                 tableData.push(
                     <tr className="sched-row" id={`${militaryTime}-row`}>
