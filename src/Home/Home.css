@@ -1,0 +1,31 @@
+.next-event-container {
+    width: 80%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0px;
+    margin-bottom: 25px;
+}
+
+.event-link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.event-button {
+    width: 80%;
+    padding: 10px 15px;
+}
+
+.bottom-nav-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;    
+}
+
+.bottom-nav-button {
+    width: 33%;
+    padding: 10px 0px;
+}

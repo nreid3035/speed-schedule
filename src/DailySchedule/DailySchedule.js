@@ -11,6 +11,7 @@ class DailySchedule extends React.Component {
         super(props)
         this.state = {
             scheduledEvents: [],
+            activeRequest: false,
             month: 0,
             day: 0,
             year: 0
@@ -19,14 +20,22 @@ class DailySchedule extends React.Component {
 
     componentDidMount() {
         
-        const scheduledEvents = this.context.scheduledEvents.filter(schedObj => schedObj.date === moment(this.context.date).format('MMM Do YYYY'))
-
         this.setState({
             month: new Date(this.context.date).getMonth(),
             day: new Date(this.context.date).getDate(),
             year: new Date(this.context.date).getFullYear(),
-            scheduledEvents: [...scheduledEvents]
         })
+    }
+
+    handleSeeSched = () => {
+      const newDate = `${this.state.month + 1}/${this.state.day}/${this.state.year}`
+      const scheduledEvents = this.context.scheduledEvents.filter(schedObj => schedObj.date === moment(newDate).format('MMM Do YYYY'))
+
+      this.context.setDateState(newDate)
+      this.setState({
+        scheduledEvents: scheduledEvents
+      })
+
     }
 
     switchDownAYear = () => {
@@ -293,21 +302,30 @@ class DailySchedule extends React.Component {
               break;
         }
         const date = `${month} ${day}, ${year}`
+        let dailyTable = null
 
         // AFTER RENDER, LOOP THROUGH DATA, MAKE TD ELEMENTS THAT CORRESPOND WITH TIMES, APPEND THOSE ELEMENTS TO THE MATCHING TR ELEMENTS
-        
+        if (!this.state.scheduledEvents.length) {
+          dailyTable = <DailyTable propsObj={{
+              date: date,
+              noData: true
+          }} />
+        } else {
+          dailyTable = <DailyTable propsObj={{
+              date: date,
+              scheduledEvents: this.state.scheduledEvents
+          }} />
+        }
         
         return (
             <>
             <div className="daily-schedule-buttons-container">
               <button onClick={() => this.handleLeftButtonClick()}>Left</button>
+              <button onClick={() => this.handleSeeSched()}>See Daily Schedule</button>
               <button onClick={() => this.handleRightButtonClick()}>Right</button>
             </div>
 
-            <DailyTable propsObj={{
-                date: date,
-                scheduledEvents: this.state.scheduledEvents
-            }} />
+            {dailyTable}
             </>
         )
     }

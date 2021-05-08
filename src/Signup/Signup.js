@@ -10,6 +10,8 @@ class Signup extends React.Component {
 
     render() {
         return (
+          <>
+            <h2>Signup</h2>
             <form className="signup-form">
                 <label htmlFor="first-name" className="signup-label">First Name</label>
                 <input type="text" name="first-name" id="first-name" className="signup-input" />
@@ -23,10 +25,12 @@ class Signup extends React.Component {
                 <input type="text" name="password" id="password" className="signup-input" />
                 <label htmlFor="confirm-password" className="signup-label">Confirm Password</label>
                 <input type="text" name="confirm-password" id="confirm-password" className="signup-input" />
-                <Link to={'/login'}>
+                <Link to={'/login'} className="signup-link">
                   <button type="submit" className="signup-submit">Submit</button>
                 </Link>
             </form>
+          </>
+    
         )
     }
 }

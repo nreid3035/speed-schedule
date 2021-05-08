@@ -12,6 +12,7 @@ import DailySchedule from '../DailySchedule/DailySchedule'
 import SpeedScheduleContext from '../SpeedScheduleContext'
 import dummyDataObj from '../dummy-data'
 import AddEvent from '../AddEvent/AddEvent'
+import hamburgerMenu from '../speed-schedule-resources/hamburger-icon.png'
 import moment from 'moment'
 
 class App extends React.Component {
@@ -19,9 +20,31 @@ class App extends React.Component {
     super(props)
     this.state = {
         date: new Date(),
+        month: new Date().getMonth(),
+        day: new Date().getDay(),
+        year: new Date().getFullYear(),
         events: [...dummyDataObj.events],
-        scheduledEvents: [...dummyDataObj.scheduledEvents]
+        scheduledEvents: [...dummyDataObj.scheduledEvents],
+        navActive: false
     }
+  }
+
+  setDateState = (newDate) => {
+    this.setState({
+      date: newDate
+    })
+  }
+
+  setYearState = (newYear) => {
+    this.setState({
+      year: newYear
+    })
+  }
+
+  setMonthState = (newMonth) => {
+    this.setState({
+      month: newMonth
+    })
   }
 
   setDayState = (newDay) => {
@@ -30,9 +53,12 @@ class App extends React.Component {
     })
   }
 
-  setDateState = (newDate) => {
+  setFullDateState = (newDate) => {
     this.setState({
-      date: newDate
+      date: newDate,
+      month: Date(newDate).getMonth(),
+      day: Date(newDate).getDay(),
+      year: Date(newDate).getFullYear()
     })
   }
 
@@ -45,6 +71,12 @@ class App extends React.Component {
   handleSchedEventStateChange = (newScheduledEvent) => {
     this.setState({
       scheduledEvents: [...this.state.scheduledEvents, newScheduledEvent]
+    })
+  }
+
+  toggleNavActive = () => {
+    this.setState({
+      navActive: !this.state.navActive
     })
   }
 
@@ -96,27 +128,43 @@ class App extends React.Component {
 
     const values = {
       date: this.state.date,
+      month: this.state.month,
+      day: this.state.day,
+      year: this.state.year,
       events: this.state.events,
       scheduledEvents: this.state.scheduledEvents,
       handleAddEventStateChange: this.handleAddEventStateChange,
       handleSchedEventStateChange: this.handleSchedEventStateChange,
-      setDateState: this.setDateState
+      setDateState: this.setDateState,
+      setDayState: this.setDayState,
+      setMonthState: this.setMonthState,
+      setYearState: this.setYearState,
+      setFullDateState: this.setFullDateState,
+    }
+
+    let nav = null
+    if (this.state.navActive) {
+        nav = <nav className="app-nav">
+        <Link to={'/home'} className="app-nav-link">
+          <button className="nav-button">Home</button>
+        </Link>
+        <Link to={'/'} className="app-nav-link">
+          <button className="nav-button">Log Out</button>
+        </Link>
+      </nav>
     }
 
     return (
       <SpeedScheduleContext.Provider value={values}>
       <div className="app-container">
         <header className="app-header">
-          <h1>Speed Schedule</h1>
-          <div>
-            <img src="" alt="hamburger-menu"/>
+          <div className="top-row-header">
+            <h1>Speed Schedule</h1>
+            <div className="menu-container" onClick={() => this.toggleNavActive()}>
+              <img src={hamburgerMenu} alt="hamburger-menu" className="hamburger-menu"/>
+            </div>
           </div>
-          <nav className="hidden">
-            <Link to={'/home'}>
-              <button>Home</button>
-            </Link>
-              <button>Log Out</button>
-          </nav>
+          {nav}
         </header>
         <main className="app-main">
           {this.renderMainRoutes()}

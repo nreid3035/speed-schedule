@@ -30,26 +30,59 @@ class ScheduleEvent extends React.Component {
 
     render() {
 
+        let hoursOptions = []
+        let minuteOptions = []
+
+        for (let i = 0; i <= 23; i++) {
+            if (i === 0) {
+                hoursOptions.push(
+                    <options className="sched-hour-option" value={i}>12 am</options>
+                )
+            } else if (i > 0 && i < 12) {
+                hoursOptions.push(
+                    <option className="sched-hour-option" value={i}>{`${i} am`}</option>
+                )
+            } else {
+                hoursOptions.push(
+                    <option className="sched-hour-option sched-option" value={i}>{`${i - 12} pm`}</option>
+                )
+            }
+        }
+
+        for (let i = 0; i < 60; i+=15) {
+            minuteOptions.push(
+                <option className="sched-minute-option sched-option" value={i}>{`${i} minutes`}</option>
+            )
+        }
+
         const options = this.context.events.map(eventObj => {
             return (
-                <option value={eventObj.event_id}>{eventObj.event_name}</option>
+                <option className="event-option" value={eventObj.event_id}>{eventObj.event_name}</option>
             )
         })
 
         return (
+          <>
             <form className="schedule-event-form" onSubmit={(e) => this.handleSchedEventSubmit(e)}>
-                <label htmlFor="date" className="sched-event-label">Date (MM/DD/YYY):</label>
+                <label htmlFor="date" className="sched-event-label">Date (MM/DD/YYYY):</label>
                 <input type="text" name="date" id="date" className="sched-event-input" />
                 <label htmlFor="start-time" className="sched-event-label">Start Time:</label>
-                <input type="text" name="start-time" id="start-time" className="sched-event-input" />
-                <label htmlFor="end-time" className="sched-event-label">End Time:</label>
-                <input type="text" name="end-time" id="end-time" className="sched-event-input" />
+                <div>
+                    <select>
+                        {hoursOptions}
+                    </select>
+                    <select>
+                        {minuteOptions}
+                    </select>
+                </div>
                 <label htmlFor="event" className="sched-event-label">Event</label>
                 <select id="select-event">
                     {options}
                 </select>
                 <button type="submit" className="sched-event-submit">Submit</button>
             </form>
+          </>
+
         )
     }
 }

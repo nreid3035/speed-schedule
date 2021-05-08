@@ -3,3 +3,25 @@
     display: flex;
     flex-direction: column;
 }
+
+.login-label {
+    padding: 5px;
+}
+
+.login-input {
+    padding: 5px 0px;
+    margin-bottom: 10px
+}
+
+.login-link {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.login-submit {
+    width: 80%;
+    padding: 10px 15px;
+}
+
