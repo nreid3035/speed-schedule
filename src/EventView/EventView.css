@@ -1,0 +1,12 @@
+.event-view-buttons-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 25px;
+}
+
+.event-view-button {
+    width: 33%;
+    padding: 10px;
+}
