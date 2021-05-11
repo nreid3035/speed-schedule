@@ -1,5 +1,6 @@
 import React from 'react'
 import Event from '../Event/Event'
+import { Link } from 'react-router-dom'
 import SpeedScheduleContext from '../SpeedScheduleContext'
 
 class EventsList extends React.Component {
@@ -16,7 +17,10 @@ class EventsList extends React.Component {
     render() {
         const eventComponents = this.context.events.map((obj, idx) => {
             return (
+              <Link to={`/event-view/${obj.event_id}`}>
                 <Event eventObj={obj} key={idx}/>
+              </Link>
+
             )
         })
 

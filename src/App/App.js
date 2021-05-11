@@ -12,6 +12,8 @@ import DailySchedule from '../DailySchedule/DailySchedule'
 import SpeedScheduleContext from '../SpeedScheduleContext'
 import dummyDataObj from '../dummy-data'
 import AddEvent from '../AddEvent/AddEvent'
+import EventView from '../EventView/EventView'
+import ScheduledEventPage from '../ScheduledEventPage/ScheduledEventPage'
 import hamburgerMenu from '../speed-schedule-resources/hamburger-icon.png'
 import moment from 'moment'
 
@@ -80,6 +82,14 @@ class App extends React.Component {
     })
   }
 
+  deleteEventFromState = (eventId) => {
+    const events = this.state.events.filter(eventObj => eventObj.event_id !== eventId)
+    console.log(events, eventId)
+    this.setState({
+      events: events
+    })
+  }
+
   renderMainRoutes = () => {
     return (
       <>
@@ -104,6 +114,10 @@ class App extends React.Component {
             path={'/events'}
             component={EventsList}
             />
+        <Route
+            path={'/event-view/:eventId'}
+            component={EventView}
+            />
         <Route 
             path={'/add-event'}
             component={AddEvent}
@@ -115,6 +129,10 @@ class App extends React.Component {
         <Route
             path={'/schedule-event'}
             component={ScheduleEvent}
+            />
+        <Route 
+            path={'scheduled-events/:schedId'}
+            component={ScheduledEventPage}
             />
         <Route 
             path={'/daily-schedule'}
@@ -140,6 +158,7 @@ class App extends React.Component {
       setMonthState: this.setMonthState,
       setYearState: this.setYearState,
       setFullDateState: this.setFullDateState,
+      deleteEventFromState: this.deleteEventFromState
     }
 
     let nav = null

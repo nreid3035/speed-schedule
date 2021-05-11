@@ -33,6 +33,7 @@ class DailySchedule extends React.Component {
 
       this.context.setDateState(newDate)
       this.setState({
+        activeRequest: true,
         scheduledEvents: scheduledEvents
       })
 
@@ -122,6 +123,9 @@ class DailySchedule extends React.Component {
     }
     
     handleLeftButtonClick = () => {
+        this.setState({
+          activeRequest: false
+        })
         if (this.state.month === 0 && this.state.day === 1) {
             this.switchDownAYear()
             return
@@ -139,6 +143,9 @@ class DailySchedule extends React.Component {
     }
 
     handleRightButtonClick = () => {
+      this.setState({
+        activeRequest: false
+      })
         switch(this.state.day) {
             case 28: 
               if (this.state.month === 1 && (this.state.year % 4) !== 0) {
@@ -303,28 +310,31 @@ class DailySchedule extends React.Component {
         }
         const date = `${month} ${day}, ${year}`
         let dailyTable = null
+        let emptyMessage = null
 
         // AFTER RENDER, LOOP THROUGH DATA, MAKE TD ELEMENTS THAT CORRESPOND WITH TIMES, APPEND THOSE ELEMENTS TO THE MATCHING TR ELEMENTS
-        if (!this.state.scheduledEvents.length) {
-          dailyTable = <DailyTable propsObj={{
-              date: date,
-              noData: true
-          }} />
-        } else {
+        if (!this.state.scheduledEvents.length && this.state.activeRequest === true) {
+
+          emptyMessage = "No scheduled Events for the day"
+          // dailyTable = <DailyTable propsObj={{
+          //     date: date,
+          //     noData: true
+          // }} />
+        }
           dailyTable = <DailyTable propsObj={{
               date: date,
               scheduledEvents: this.state.scheduledEvents
           }} />
-        }
+        
         
         return (
             <>
             <div className="daily-schedule-buttons-container">
-              <button onClick={() => this.handleLeftButtonClick()}>Left</button>
-              <button onClick={() => this.handleSeeSched()}>See Daily Schedule</button>
-              <button onClick={() => this.handleRightButtonClick()}>Right</button>
+              <button onClick={() => this.handleLeftButtonClick()} className="daily-sched-button">Left</button>
+              <button onClick={() => this.handleSeeSched()} className="daily-sched-button">See Daily Schedule</button>
+              <button onClick={() => this.handleRightButtonClick()} className="daily-sched-button">Right</button>
             </div>
-
+            {emptyMessage}
             {dailyTable}
             </>
         )

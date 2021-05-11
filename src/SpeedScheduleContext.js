@@ -14,5 +14,6 @@ export default React.createContext({
     setFullDateState: () => {},
     setDayState: () => {},
     setMonthState: () => {},
-    setYearState: () => {}
+    setYearState: () => {},
+    deleteEventFromState: () => {}
 })

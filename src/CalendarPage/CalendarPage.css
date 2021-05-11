@@ -1,0 +1,18 @@
+.daily-view-link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.info-box {
+    width: 80%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calendar-button {
+    width: 80%;
+    padding: 10px 15px;
+}

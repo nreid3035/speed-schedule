@@ -44,15 +44,16 @@ tr {
     border: 1px solid black;
     height: 50%;
     text-align: center;
-    padding: 5px;
+    padding: 10px 0px;
 }
 
 .data-div-quarter {
     width: 100%;
     text-align: center;
-    padding: 5px;
+    padding: 15px 0px;
     border: 1px solid black;
     height: 25%;
+    align-self: center;
 }
 
 .daily-table-date {

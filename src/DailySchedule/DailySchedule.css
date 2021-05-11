@@ -3,3 +3,8 @@
     display: flex;
     justify-content: space-evenly;
 }
+
+.daily-sched-button {
+    width: 30%;
+    padding: 10px 5px;
+}
