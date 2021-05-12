@@ -131,7 +131,7 @@ class App extends React.Component {
             component={ScheduleEvent}
             />
         <Route 
-            path={'scheduled-events/:schedId'}
+            path={'/scheduled-events/:schedId'}
             component={ScheduledEventPage}
             />
         <Route 

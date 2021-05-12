@@ -61,7 +61,7 @@ class ScheduleEvent extends React.Component {
           <>
             <form className="schedule-event-form" onSubmit={(e) => this.handleSchedEventSubmit(e)}>
                 <label htmlFor="date" className="sched-event-label">Date (MM/DD/YYYY):</label>
-                <input type="date" name="date" id="date" className="sched-event-input" />
+                <input type="date" name="date" id="date" className="sched-event-input" required/>
                 <label htmlFor="start-time" className="sched-event-label">Start Time:</label>
                 <div>
                     <select  id="sched-hour-select">

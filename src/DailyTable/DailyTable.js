@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react'
 import SpeedScheduleContext from '../SpeedScheduleContext'
 import './DailyTable.css'
 
@@ -34,6 +35,10 @@ class DailyTable extends React.Component {
         this.setState({
             processedDuration: this.state.processedDuration += processedDuration
         })
+    }
+
+    linkToScheduledEventPage = (schedId) => {
+      this.props.propsObj.history.push(`/scheduled-events/${schedId}`)
     }
 
     handleMilitaryTime = (militaryTime) => {
@@ -161,13 +166,14 @@ class DailyTable extends React.Component {
                 const schedEvent = this.props.propsObj.scheduledEvents.filter(schedEvent => schedEvent.start_time === activeStartTime)
                 const eventObj = this.context.events.filter(eventObj => eventObj.event_id === schedEvent[0].event_id)
                 const timeLeft = eventObj[0].duration - processedDuration 
+                const schedId = schedEvent[0].sched_event_id
 
                 if (timeLeft > 60) {
                     processedDuration += 60
                     tableData.push(
                       <tr className="sched-row" id={`${militaryTime}-row`}>
                         <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
-                        <td className="event-table-data">{eventObj[0].event_name}</td>
+                          <td className="event-table-data" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</td>
                       </tr> 
                     )
                 } 
@@ -180,7 +186,7 @@ class DailyTable extends React.Component {
                     tableData.push(
                       <tr className="sched-row" id={`${militaryTime}-row`}>
                         <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
-                        <td className="event-table-data">{eventObj[0].event_name}</td>
+                        <td className="event-table-data" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</td>
                       </tr> 
                     )
                 }
@@ -194,9 +200,9 @@ class DailyTable extends React.Component {
                       <tr className="sched-row" id={`${militaryTime}-row`}>
                         <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
                         <td className="event-table-data">
-                          <div className="data-div-quarter">{eventObj[0].event_name}</div>
-                          <div className="data-div-quarter">{eventObj[0].event_name}</div>
-                          <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                          <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
+                          <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
+                          <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                           <div className="data-div-quarter"></div>
                         </td>
                       </tr>
@@ -212,7 +218,7 @@ class DailyTable extends React.Component {
                         <tr className="sched-row" id={`${militaryTime}-row`}>
                         <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
                         <td className="event-table-data">
-                          <div className="data-div-half">{eventObj[0].event_name}</div>
+                          <div className="data-div-half" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                           <div className="data-div-half"></div>
                         </td>
                       </tr> 
@@ -228,7 +234,7 @@ class DailyTable extends React.Component {
                         <tr className="sched-row" id={`${militaryTime}-row`}>
                         <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
                         <td className="event-table-data">
-                          <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                          <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                           <div className="data-div-quarter"></div>
                           <div className="data-div-quarter"></div>
                           <div className="data-div-quarter"></div>
@@ -243,6 +249,7 @@ class DailyTable extends React.Component {
                 const idx = startHours.indexOf(militaryTime.slice(0, 2))
                 const startTime = startTimes[idx]
                 const schedEvent = this.props.propsObj.scheduledEvents.filter(schedEvent => schedEvent.start_time === startTime)
+                const schedId = schedEvent[0].sched_event_id
                 const eventObj = this.context.events.filter(eventObj => eventObj.event_id === schedEvent[0].event_id)
                 console.log(eventObj)
                 
@@ -254,14 +261,14 @@ class DailyTable extends React.Component {
                         tableData.push(
                         <tr className="sched-row" id={`${militaryTime}-row`}>
                           <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
-                          <td className="event-table-data">{eventObj[0].event_name}</td>
+                          <td className="event-table-data" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</td>
                         </tr>
                         )
                     } else if (eventObj[0].duration === 60) {
                         tableData.push(
                           <tr className="sched-row" id={`${militaryTime}-row`}>
                             <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
-                            <td className="event-table-data">{eventObj[0].event_name}</td>
+                            <td className="event-table-data" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</td>
                           </tr> 
                         )
                     } else if (eventObj[0].duration === 45) {
@@ -269,9 +276,9 @@ class DailyTable extends React.Component {
                           <tr className="sched-row" id={`${militaryTime}-row`}>
                             <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
                             <td className="event-table-data">
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                                 <div className="data-div-quarter"></div>
                             </td>
                           </tr>
@@ -281,7 +288,7 @@ class DailyTable extends React.Component {
                             <tr className="sched-row" id={`${militaryTime}-row`}>
                             <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
                             <td className="event-table-data">
-                                <div className="data-div-half">{eventObj[0].event_name}</div>
+                                <div className="data-div-half" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                                 <div className="data-div-half"></div>
                             </td>
                           </tr>
@@ -291,7 +298,7 @@ class DailyTable extends React.Component {
                           <tr className="sched-row" id={`${militaryTime}-row`}>
                             <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
                             <td className="event-table-data">
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                                 <div className="data-div-quarter"></div>
                                 <div className="data-div-quarter"></div>
                                 <div className="data-div-quarter"></div>
@@ -309,9 +316,9 @@ class DailyTable extends React.Component {
                             <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
                             <td className="event-table-data">
                                 <div className="data-div-quarter"></div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                             </td>
                           </tr>
                         )
@@ -321,9 +328,9 @@ class DailyTable extends React.Component {
                             <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
                             <td className="event-table-data">
                                 <div className="data-div-quarter"></div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                             </td>
                           </tr>
                         )
@@ -333,8 +340,8 @@ class DailyTable extends React.Component {
                             <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
                             <td className="event-table-data">
                                 <div className="data-div-quarter"></div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                                 <div className="data-div-quarter"></div>
                             </td>
                           </tr>
@@ -345,7 +352,7 @@ class DailyTable extends React.Component {
                             <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
                             <td className="event-table-data">
                                 <div className="data-div-quarter"></div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                                 <div className="data-div-quarter"></div>
                                 <div className="data-div-quarter`"></div>
                             </td>
@@ -362,7 +369,7 @@ class DailyTable extends React.Component {
                             <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
                             <td className="event-table-data">
                                 <div className="data-div-half"></div>
-                                <div className="data-div-half">{eventObj[0].event_name}</div>
+                                <div className="data-div-half" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                             </td>
                           </tr>
                         )
@@ -372,7 +379,7 @@ class DailyTable extends React.Component {
                             <td className="time-column" id={militaryTime}>{this.handleMilitaryTime(militaryTime)}</td>
                             <td className="event-table-data">
                                 <div className="data-div-half"></div>
-                                <div className="data-div-half">{eventObj[0].event_name}</div>
+                                <div className="data-div-half" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                             </td>
                           </tr>
                         )
@@ -383,7 +390,7 @@ class DailyTable extends React.Component {
                             <td className="event-table-data">
                                 <div className="data-div-quarter"></div>
                                 <div className="data-div-quarter"></div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                                 <div className="data-div-quarter"></div>
                             </td>
                           </tr>
@@ -401,7 +408,7 @@ class DailyTable extends React.Component {
                                 <div className="data-div-quarter"></div>
                                 <div className="data-div-quarter"></div>
                                 <div className="data-div-quarter"></div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                             </td>
                           </tr>
                         )
@@ -412,7 +419,7 @@ class DailyTable extends React.Component {
                                 <div className="data-div-quarter"></div>
                                 <div className="data-div-quarter"></div>
                                 <div className="data-div-quarter"></div>
-                                <div className="data-div-quarter">{eventObj[0].event_name}</div>
+                                <div className="data-div-quarter" onClick={() => this.linkToScheduledEventPage(schedId)}>{eventObj[0].event_name}</div>
                             </td>
                         </tr>
                     }

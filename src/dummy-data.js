@@ -9,7 +9,7 @@ const dummyDataObj = {
         {
             event_id: 2,
             event_name: "Work",
-            duration: 120,
+            duration: 135,
             notes: "Lunch break is at 12pm"
         },
         {

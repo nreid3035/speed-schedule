@@ -322,6 +322,7 @@ class DailySchedule extends React.Component {
           // }} />
         }
           dailyTable = <DailyTable propsObj={{
+              history: this.props.history,
               date: date,
               scheduledEvents: this.state.scheduledEvents
           }} />
